@@ -20,14 +20,16 @@ const login = async (req, res) => {
             email,
         }
     })
-
+ 
     const isPasswordCorrect = user && (await brypt.compare(password, user.password)) //мы сравниваем два пароля пароль который пришел с клиента и хэш пароля который в текушем пользователе хранится и записываем ответ  впеременной
+    const secret = process.env.JWT_SECRET;
 
     if (user && isPasswordCorrect) { // если пароль верный и пользователь нашёлся
         res.status(200).json({
             id: user.id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            token: jwt.sign({id : user.id}, secret, {expiresIn: '30d'})
         })
     } else {
         return res.status(400).json({ message: 'Неверно введён логин или пароль' })
@@ -40,7 +42,7 @@ const login = async (req, res) => {
     @access Public
 */
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     const { email, password, name } = req.body
 
     if (!email || !password || !name) {
@@ -78,8 +80,14 @@ const register = async (req, res) => {
     }
 }
 
+/*
+    @route POST /api/user/current
+    @desc Текуший пользователь
+    @access Private
+*/
+
 const current = async (req, res) => {
-    res.send('current');
+    return res.status(200).json(req.user)
 }
 
 module.exports = {
