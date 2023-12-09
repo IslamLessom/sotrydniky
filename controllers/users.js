@@ -37,7 +37,7 @@ const login = async (req, res) => {
         }
 
     } catch {
-        res.status(400).json({ message: 'Что-то пошло не так' })
+        res.status(500).json({ message: 'Что-то пошло не так' })
     }
 
 }
@@ -87,7 +87,7 @@ const register = async (req, res, next) => {
         }
 
     } catch {
-        res.status(400).json({ message: 'Что-то пошло не так' })
+        res.status(500).json({ message: 'Что-то пошло не так' })
     }
 
 }
@@ -102,7 +102,7 @@ const current = async (req, res) => {
     try {
         return res.status(200).json(req.user)
     } catch {
-        res.status(400).json({ message: 'Что-то пошло не так' })
+        res.status(500).json({ message: 'Что-то пошло не так' })
     }
 }
 
