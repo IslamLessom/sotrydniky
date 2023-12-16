@@ -3,18 +3,20 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
+import { Paths } from './paths';
+import { Login } from './pages/login/index'
+import { Register } from './pages/register/index'
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { Paths } from './paths';
 
 const router = createBrowserRouter([
   {
     path: Paths.login,
-    element: <h1>Login</h1>
+    element: <Login />
   },
   {
     path: Paths.register,
-    element: <h1>Register</h1>
+    element: <Register />
   },
   {
     path: Paths.home,
