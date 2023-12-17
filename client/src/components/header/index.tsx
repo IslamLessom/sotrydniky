@@ -1,7 +1,30 @@
-import React from 'react'
+import { Layout, Space, Typography } from 'antd'
+import { TeamOutlined } from '@ant-design/icons'
+import { CustomButton } from '../custom-button'
+import { Link } from 'react-router-dom'
+import { Paths } from '../../paths'
+
+import styles from './index.module.css'
 
 export const Header = () => {
   return (
-    <div>Header</div>
+    <Layout.Header className={styles.header}>
+      <Space>
+        <TeamOutlined className={styles.teamIcon} />
+        <Link to={Paths.home}>
+          <CustomButton type='link'>
+            <Typography.Title level={1}>Сотрудники</Typography.Title>
+          </CustomButton>
+        </Link>
+      </Space>
+      <Space>
+        <Link to={Paths.register}>
+          <CustomButton type='link'>Зарегистрироваться</CustomButton>
+        </Link>
+        <Link to={Paths.login}>
+          <CustomButton type='link'>Войти</CustomButton>
+        </Link>
+      </Space>
+    </Layout.Header>
   )
 }

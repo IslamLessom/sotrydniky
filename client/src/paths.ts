@@ -1,5 +1,5 @@
 export const Paths = {
-    home: '',
+    home: '/',
     employeeAdd: '/employee/add',
     employeeEdit: '/employee/edit',
     employee: '/employee',
