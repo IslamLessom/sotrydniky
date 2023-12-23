@@ -1,4 +1,3 @@
-import React from 'react'
 import { Layout } from '../../components/layout'
 import { Card, Form, Row, Space, Typography } from 'antd'
 import { CustomInput } from '../../components/custom-input'

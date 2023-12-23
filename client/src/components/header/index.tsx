@@ -21,8 +21,8 @@ export const Header = () => {
         <Link to={Paths.register}>
           <CustomButton type='link' icon={<UserOutlined />}>Зарегистрироваться</CustomButton>
         </Link>
-        <Link to={Paths.login}>
-          <CustomButton type='link' icon={<LoginOutlined />}>Войти</CustomButton>
+        <Link to={Paths.login} >
+          <CustomButton  type='link' icon={<LoginOutlined />}>Войти</CustomButton>
         </Link>
       </Space>
     </Layout.Header>
