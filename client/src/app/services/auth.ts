@@ -6,14 +6,33 @@ type ResponseLoginData = User & { token: string } //нам будет прихо
 
 export const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        login: builder.mutation({
+        login: builder.mutation<ResponseLoginData, UserData>({
             query: (userData) => ({
                 url: '/user/login',
                 method: 'POST',
                 body: userData
             }),
 
-        }) //builder.mutation() - потому что мы делаем post запрос
+        }), //builder.mutation() - потому что мы делаем post запрос
+        register: builder.mutation<ResponseLoginData, UserData>({
+            query: (userData) => ({
+                url: '/user/register',
+                method: 'POST',
+                body: userData
+            }),
+
+        }),
+        current: builder.query<ResponseLoginData, void>({
+            query: () => ({
+                url: '/user/current',
+                method: 'GET',
+            }),
+
+        }),
 
     })
 })
+
+export const { useLoginMutation, useRegisterMutation, useCurrentQuery } = authApi
+
+export const { endpoints: { login, register, current } } = authApi
