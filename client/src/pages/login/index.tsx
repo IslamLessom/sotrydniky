@@ -1,30 +1,44 @@
+import { useState } from 'react'
 import { Layout } from '../../components/layout'
 import { Card, Form, Row, Space, Typography } from 'antd'
 import { CustomInput } from '../../components/custom-input'
 import { PasswordInput } from '../../components/custom-password-input'
 import { CustomButton } from '../../components/custom-button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
+import { UserData, useLoginMutation } from '../../app/services/auth'
+import { isErrorWithMessage } from '../../utils/is-error-withh-message'
+import { ErrorMessage } from '../../components/error-message'
 
 export const Login = () => {
+  const navigate = useNavigate()
+  const [loginUser, loginUserResult] = useLoginMutation()
+  const [error, setError] = useState('')
+
+  const login = async (data: UserData) => {
+    try {
+      await loginUser(data).unwrap() //unwrap - получаем все данные
+
+      navigate('/')
+    } catch (err) {
+      const maybeError = isErrorWithMessage(err)
+
+      if (maybeError) {
+        setError(err.data.message)
+      } else {
+        setError('Неизвестная ошибка')
+      }
+    }
+  }
+
   return (
     <Layout>
       <Row align="middle" justify="center">
         <Card title="Войдите" style={{ width: '30rem' }}>
-          <Form onFinish={() => null}>
-            <CustomInput
-              type="email"
-              name='email'
-              placeholder='Email'
-            />
-            <PasswordInput
-              name='password'
-              placeholder='Пароль'
-            />
-            <CustomButton
-              type='primary'
-              htmlType='submit'
-            >
+          <Form onFinish={login}>
+            <CustomInput type="email" name='email' placeholder='Email' />
+            <PasswordInput name='password' placeholder='Пароль' />
+            <CustomButton type='primary' htmlType='submit'>
               Войти
             </CustomButton>
           </Form>
@@ -32,6 +46,7 @@ export const Login = () => {
             <Typography.Text>
               Нет аккаунта? <Link to={Paths.register}>Зарегистрируйтесь</Link>
             </Typography.Text>
+            <ErrorMessage />
           </Space>
         </Card>
       </Row>
