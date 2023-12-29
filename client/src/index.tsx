@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import { ConfigProvider, theme } from 'antd';
 import './index.css';
 import { Auth } from './features/auth/auth';
+import { Employees } from './pages/employees';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: Paths.home,
-    element: <h1>home</h1>
+    element: <Employees />
   },
 ])
 
