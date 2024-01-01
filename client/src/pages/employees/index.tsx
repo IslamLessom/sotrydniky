@@ -30,18 +30,20 @@ const columns: ColumnsType<Employee> = [
 ]
 
 export const Employees = () => {
-    const navigate = useNavigate()
-    const { data, isLoading } = useGetAllEmployeesQuery()
-    const user = useSelector(selectUser)
+    const navigate = useNavigate();
+    const user = useSelector(selectUser);
+    const { data, isLoading } = useGetAllEmployeesQuery();
 
     useEffect(() => {
-        if(!user) {
-            navigate('/login')
+        if (!user) {
+            navigate("/login");
         }
-    }, [navigate, user])
+    }, [user, navigate]);
+
+    const gotToAddUser = () => navigate(Paths.employeeAdd);
     return (
         <Layout>
-            <CustomButton type="primary" onClick={() => null} icon={<PlusCircleOutlined />}>
+            <CustomButton type="primary" onClick={gotToAddUser} icon={<PlusCircleOutlined />}>
                 Добавить
             </CustomButton>
             <Table
