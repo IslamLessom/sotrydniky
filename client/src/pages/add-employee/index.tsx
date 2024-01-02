@@ -6,16 +6,16 @@ import { Layout } from "../../components/layout";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 import { useEffect } from "react";
-import { useAddEmployeesMutation} from "../../app/services/employess";
+import { useAddEmployeeMutation } from "../../app/serivices/employees";
 import { Employee } from "@prisma/client";
-import { isErrorWithMessage } from "../../utils/is-error-withh-message";
+import { isErrorWithMessage } from "../../utils/is-error-with-message";
 import { Paths } from "../../paths";
 
 export const AddEmployee = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const [error, setError] = useState("");
-  const [addEmployee] = useAddEmployeesMutation();
+  const [addEmployee] = useAddEmployeeMutation();
 
   useEffect(() => {
     if (!user) {

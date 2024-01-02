@@ -1,52 +1,63 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { store } from './app/store';
-import { Paths } from './paths';
-import { Login } from './pages/login/index'
-import { Register } from './pages/register/index'
-import reportWebVitals from './reportWebVitals';
-
-import { ConfigProvider, theme } from 'antd';
-import './index.css';
-import { Auth } from './features/auth/auth';
-import { Employees } from './pages/employees';
-import { AddEmployee } from './pages/add-employee';
-import { Status } from './pages/status';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import reportWebVitals from "./reportWebVitals";
+import { ConfigProvider, theme } from "antd";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AddEmployee } from "./pages/add-employee";
+import { Employees } from "./pages/employees";
+import { Register } from "./pages/register";
+import { Login } from "./pages/login";
+import { Employee } from "./pages/employee";
+import { Status } from "./pages/status";
+import { EditEmployee } from "./pages/edit-employee";
+import { Auth } from "./features/auth/auth";
+import { Paths } from "./paths";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
+    path: Paths.home,
+    element: <Employees />,
+  },
+  {
     path: Paths.login,
-    element: <Login />
+    element: <Login />,
   },
   {
     path: Paths.register,
-    element: <Register />
-  },
-  {
-    path: Paths.home,
-    element: <Employees />
+    element: <Register />,
   },
   {
     path: Paths.employeeAdd,
-    element: <AddEmployee />
+    element: <AddEmployee />,
+  },
+  {
+    path: `${Paths.employee}/:id`,
+    element: <Employee />,
+  },
+  {
+    path: `${Paths.employeeEdit}/:id`,
+    element: <EditEmployee />,
   },
   {
     path: `${Paths.status}/:status`,
-    element: <Status />
+    element: <Status />,
   },
-])
+]);
 
-const container = document.getElementById('root')!;
+const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ConfigProvider theme={{
-        algorithm: theme.darkAlgorithm
-      }}>
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
         <Auth>
           <RouterProvider router={router} />
         </Auth>
@@ -55,7 +66,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

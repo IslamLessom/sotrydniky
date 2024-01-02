@@ -1,4 +1,4 @@
-import { useCurrentQuery } from "../../app/services/auth";
+import { useCurrentQuery } from "../../app/serivices/auth";
 
 export const Auth = ({ children }: { children: JSX.Element }) => {
   const { isLoading } = useCurrentQuery();
@@ -6,5 +6,6 @@ export const Auth = ({ children }: { children: JSX.Element }) => {
   if(isLoading) {
     return <span>Загрузка</span>
   }
+
   return children
 }

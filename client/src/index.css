@@ -6,9 +6,7 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-body>div {
+html, body, body > div {
   height: 100%;
 }
 
@@ -20,9 +18,4 @@ body {
 
 a {
   text-decoration: none;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
